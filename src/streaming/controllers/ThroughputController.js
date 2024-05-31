@@ -37,9 +37,7 @@ import {HTTPRequest} from '../vo/metrics/HTTPRequest.js';
 import MediaPlayerEvents from '../MediaPlayerEvents.js';
 import EventBus from '../../core/EventBus.js';
 
-/**
- * @constructor
- */
+
 function ThroughputController() {
 
     const context = this.context;

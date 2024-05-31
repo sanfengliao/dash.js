@@ -996,10 +996,6 @@ import Events from './events/Events.js';
  */
 
 
-/**
- * @class
- * @ignore
- */
 function Settings() {
     let instance;
     const context = this.context;

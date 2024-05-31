@@ -49,6 +49,9 @@ import Constants from '../streaming/constants/Constants.js';
 
 function DashAdapter() {
     let instance,
+        /**
+         * @type { import('../streaming/MediaPlayer.js').GetInstance<import('./models/DashManifestModel.js')> }
+         */
         dashManifestModel,
         patchManifestModel,
         voPeriods,

@@ -134,7 +134,11 @@ const FactoryMaker = (function () {
     function getClassFactoryByName(name) {
         return getFactoryByName(name, classFactories);
     }
-
+    /**
+     * 
+     * @param {T} classConstructor 
+     * @returns  
+     */
     function getClassFactory(classConstructor) {
         let factory = getFactoryByName(classConstructor.__dashjs_factory_name, classFactories);
 

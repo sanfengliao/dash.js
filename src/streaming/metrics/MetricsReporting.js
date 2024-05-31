@@ -44,7 +44,7 @@ function MetricsReporting() {
     /**
      * Create a MetricsCollectionController, and a DVBErrorsTranslator
      * @param {Object} config - dependancies from owner
-     * @return {MetricsCollectionController} Metrics Collection Controller
+     * 
      */
     function createMetricsReporting(config) {
         dvbErrorsTranslator = DVBErrorsTranslator(context).getInstance({
@@ -83,6 +83,9 @@ function MetricsReporting() {
 }
 
 MetricsReporting.__dashjs_factory_name = 'MetricsReporting';
+/**
+ * @type {(import('../../core/FactoryMaker.js').ClassFactory<MetricsReporting>) & {events: import('./MetricsReportingEvents.js')['default']}}
+ */
 const factory = dashjs.FactoryMaker.getClassFactory(MetricsReporting); 
 factory.events = MetricsReportingEvents;
 dashjs.FactoryMaker.updateClassFactory(MetricsReporting.__dashjs_factory_name, factory); 

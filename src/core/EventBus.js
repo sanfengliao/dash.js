@@ -154,8 +154,14 @@ function EventBus() {
 }
 
 EventBus.__dashjs_factory_name = 'EventBus';
+/**
+ * @type {(import('./FactoryMaker.js').SingletonFactory<EventBus>) & {
+ * EVENT_PRIORITY_LOW: number, EVENT_PRIORITY_HIGH: number}}
+ 
+ */
 const factory = FactoryMaker.getSingletonFactory(EventBus);
 factory.EVENT_PRIORITY_LOW = EVENT_PRIORITY_LOW;
 factory.EVENT_PRIORITY_HIGH = EVENT_PRIORITY_HIGH;
 FactoryMaker.updateSingletonFactory(EventBus.__dashjs_factory_name, factory);
 export default factory;
+

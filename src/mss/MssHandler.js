@@ -241,6 +241,9 @@ function MssHandler(config) {
 }
 
 MssHandler.__dashjs_factory_name = 'MssHandler';
+/**
+ * @type {(import('../core/FactoryMaker.js').ClassFactory<MssHandler>) & {errors: import('./errors/MssErrors.js')['default']}}
+ */
 const factory = dashjs.FactoryMaker.getClassFactory(MssHandler); 
 factory.errors = MssErrors;
 dashjs.FactoryMaker.updateClassFactory(MssHandler.__dashjs_factory_name, factory); 

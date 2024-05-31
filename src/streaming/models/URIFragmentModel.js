@@ -52,6 +52,7 @@ function URIFragmentModel() {
         if (!uri) return null;
 
         const hashIndex = uri.indexOf('#');
+        // 给URIFragmentDataVO对应的字段负值
         if (hashIndex !== -1) {
             const fragments = uri.substr(hashIndex + 1).split('&');
             for (let i = 0, len = fragments.length; i < len; ++i) {

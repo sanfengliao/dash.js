@@ -54,9 +54,28 @@ function StreamController() {
     const context = this.context;
     const eventBus = EventBus(context).getInstance();
 
-    let instance, logger, capabilities, capabilitiesFilter, manifestUpdater, manifestLoader, manifestModel, adapter,
-        dashMetrics, mediaSourceController, timeSyncController, contentSteeringController, baseURLController,
-        segmentBaseController, uriFragmentModel, abrController, throughputController, mediaController, eventController,
+    let instance, logger, capabilities;
+    /**
+     * @type {import('../MediaPlayer.js').GetInstance<import('../utils/CapabilitiesFilter.js')>}
+     */
+    let capabilitiesFilter;
+    let manifestUpdater;
+    /**
+     * @type {import('../MediaPlayer.js').Create<import('../ManifestLoader.js')>}
+     */
+    let manifestLoader
+    let manifestModel;
+    /**
+     * @type {import('../MediaPlayer.js').GetInstance<import('../../dash/DashAdapter.js')>}
+     */
+    let adapter;
+    let dashMetrics;
+    let mediaSourceController, timeSyncController, contentSteeringController;
+    /**
+     * @type {import('../MediaPlayer.js').Create<import('../controllers/BaseURLController.js')>}
+     */
+    let baseURLController;
+    let segmentBaseController, uriFragmentModel, abrController, throughputController, mediaController, eventController,
         initCache,
         errHandler, timelineConverter, streams, activeStream, protectionController, textController, protectionData,
         autoPlay, isStreamSwitchingInProgress, hasMediaError, hasInitialisationError, mediaSource, videoModel,

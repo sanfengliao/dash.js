@@ -383,6 +383,10 @@ function OfflineController(config) {
 }
 
 OfflineController.__dashjs_factory_name = 'OfflineController';
+/**
+ * @type {(import('../../core/FactoryMaker.js').ClassFactory<OfflineController>) & {events: import('../events/OfflineEvents.js')['default'], errors: import('../errors/OfflineErrors.js')['default']}}
+ 
+ */
 const factory = dashjs.FactoryMaker.getClassFactory(OfflineController); 
 factory.events = OfflineEvents;
 factory.errors = OfflineErrors;

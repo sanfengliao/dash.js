@@ -85,7 +85,6 @@ function Debug(config) {
      * @param {object} instance Object for which the logger is created. It is used
      * to include calle object information in log messages.
      * @memberof module:Debug
-     * @returns {Logger}
      * @instance
      */
     function getLogger(instance) {
@@ -187,7 +186,9 @@ function Debug(config) {
 }
 
 Debug.__dashjs_factory_name = 'Debug';
-
+/**
+ * @type {(import('./FactoryMaker.js').SingletonFactory<Debug>) & {LOG_LEVEL_NONE: number, LOG_LEVEL_FATAL: number, LOG_LEVEL_ERROR: number, LOG_LEVEL_WARNING: number, LOG_LEVEL_INFO: number, LOG_LEVEL_DEBUG: number}}
+ */
 const factory = FactoryMaker.getSingletonFactory(Debug);
 factory.LOG_LEVEL_NONE = LOG_LEVEL_NONE;
 factory.LOG_LEVEL_FATAL = LOG_LEVEL_FATAL;

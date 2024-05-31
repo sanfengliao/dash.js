@@ -107,6 +107,13 @@ function ManifestLoader(config) {
         }
     }
 
+    /**
+     * 加载mpd文件
+     * @param {string} url 
+     * @param {*} serviceLocation 
+     * @param {*} queryParams 
+     * @returns
+     */
     function load(url, serviceLocation = null, queryParams = null) {
 
         const requestStartDate = new Date();

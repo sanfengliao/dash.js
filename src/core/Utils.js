@@ -58,6 +58,11 @@ class Utils {
         return dest;
     }
 
+    /**
+     * @template T
+     * @param {T} src 
+     * @returns {T}
+     */
     static clone(src) {
         if (!src || typeof src !== 'object') {
             return src; // anything

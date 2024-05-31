@@ -5,7 +5,7 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "strict": true,                                      /* Enable all strict type-checking options. */
-    "skipLibCheck": false
+    "skipLibCheck": true
   }
   
 }

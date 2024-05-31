@@ -109,7 +109,6 @@ function Protection() {
      * a single piece of content.
      *
      * @param {Object} config
-     * @return {ProtectionController} protection controller
      *
      */
     function createProtectionSystem(config) {
@@ -200,6 +199,11 @@ function Protection() {
 }
 
 Protection.__dashjs_factory_name = 'Protection';
+/**
+ * 
+ * @type {(import('../../core/FactoryMaker.js').ClassFactory<Protection>) & {
+ *  events: import('./ProtectionEvents.js')['default'], errors: import('./errors/ProtectionErrors.js')['default']}}
+ */
 const factory = dashjs.FactoryMaker.getClassFactory(Protection); 
 factory.events = ProtectionEvents;
 factory.errors = ProtectionErrors;

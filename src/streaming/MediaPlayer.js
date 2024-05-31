@@ -83,6 +83,16 @@ import ThroughputController from './controllers/ThroughputController.js';
 import ClientDataReportingController from './controllers/ClientDataReportingController.js';
 
 /**
+ * @template T
+ * @typedef {ReturnType<ReturnType<T['default']>['getInstance']> } GetInstance
+ */
+
+/**
+ * @template T
+ * @typedef {ReturnType<ReturnType<T['default']>['create']> } Create
+ */
+
+/**
  * The media types
  * @typedef {('video' | 'audio' | 'text' | 'image')} MediaType
  */
@@ -131,6 +141,9 @@ function MediaPlayer() {
     const debug = Debug(context).getInstance({ settings: settings });
 
     let instance,
+        /**
+         * @type {ReturnType<GetInstance<import('../core/Debug.js')>['getLogger']>}
+         */
         logger,
         source,
         protectionData,
@@ -139,37 +152,135 @@ function MediaPlayer() {
         playbackInitialized,
         autoPlay,
         providedStartTime,
+        /**
+         * @type {GetInstance<import('./controllers/AbrController.js')>}
+         */
         abrController,
+        /**
+         * @type {GetInstance<import('./controllers/ThroughputController.js')>}
+         */
         throughputController,
+        /**
+         * @type {GetInstance<import('./net/SchemeLoaderFactory.js')>>}
+         */
         schemeLoaderFactory,
+        /**
+         * @type {GetInstance<import('../dash/utils/TimelineConverter.js')>}
+         */
         timelineConverter,
+
+        /**
+         * @type {GetInstance<import('./controllers/MediaController.js')>}
+         */
         mediaController,
+        /**
+         * @type {ReturnType<Create<import('./protection/Protection.js')>['createProtectionSystem']>}
+         */
         protectionController,
+        /**
+         * @type {ReturnType<Create<import('./metrics/MetricsReporting.js')>['createMetricsReporting']>}
+         */
         metricsReportingController,
+        /**
+         * @type {Create<import('../mss/MssHandler.js')>}
+         */
         mssHandler,
+
+        /**
+         * @type {Create<import('../offline/controllers/OfflineController.js')>}
+         */
         offlineController,
+        /**
+         * @type {GetInstance<import('../dash/DashAdapter.js')>}
+         */
         adapter,
+        /**
+         * @type {GetInstance<import('./models/MediaPlayerModel.js')>}
+         */
         mediaPlayerModel,
+        /**
+         * @type {GetInstance<import('./models/CustomParametersModel.js')>}
+         */
         customParametersModel,
+        /**
+         * @type {ReturnType<ReturnType<typeof import('./utils/ErrorHandler.js')['default']>['getInstance']>}
+         */
         errHandler,
+        /**
+         * @type {Create<import('./controllers/BaseURLController.js')>}
+         */
         baseURLController,
+        /**
+         * @type {ReturnType<ReturnType<typeof import('./utils/Capabilities.js')['default']>['getInstance']>}
+         */
         capabilities,
+        /**
+         * @type {ReturnType<ReturnType<typeof import('./utils/CapabilitiesFilter.js')['default']>['getInstance']>}
+         */
         capabilitiesFilter,
+        /**
+         * @type {GetInstance<import('./controllers/StreamController.js')>}
+         */
         streamController,
+        /**
+         * @type {ReturnType<ReturnType<typeof import('./text/TextController.js')['default']>['create']>}
+         */
         textController,
+        /**
+         * @type {ReturnType<ReturnType<typeof import('./controllers/GapController.js')['default']>['getInstance']>}
+         */
         gapController,
+        /**
+         *  @type {ReturnType<ReturnType<typeof import('./controllers/GapController.js')['default']>['getInstance']>}
+         */
         playbackController,
+        /**
+         * @type {GetInstance<import('../dash/controllers/ServiceDescriptionController.js')>}
+         */
         serviceDescriptionController,
+        /**
+         * @type {GetInstance<import('../dash/controllers/ContentSteeringController.js')>}
+         */
         contentSteeringController,
+        /**
+         * @type {GetInstance<import('./controllers/CatchupController.js')>}
+         */
         catchupController,
+        /**
+         * @type {GetInstance<import('../dash/DashMetrics.js')>}
+         */
         dashMetrics,
+        /**
+         * @type {GetInstance<import('./models/ManifestModel.js')>}
+         */
         manifestModel,
+        /**
+         * @type {GetInstance<import('./models/CmcdModel.js')>}
+         */
         cmcdModel,
+        /**
+         * @type {GetInstance<import('./models/CmsdModel.js')>}
+         */
         cmsdModel,
+        /**
+         * @type {GetInstance<import('./models/VideoModel.js')>}
+         */
         videoModel,
+        /**
+         * @type {GetInstance<import('./models/URIFragmentModel.js')>}
+         */
         uriFragmentModel,
+        /**
+         * @type {GetInstance<import('./utils/DOMStorage.js')>}
+         */
         domStorage,
+        /**
+         * @type {GetInstance<import('../dash/controllers/SegmentBaseController.js')>}
+         */
         segmentBaseController,
+        /**
+         * @type {GetInstance<import('./controllers/ClientDataReportingController.js')>}
+         */
         clientDataReportingController;
 
     /*

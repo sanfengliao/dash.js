@@ -50,6 +50,9 @@ function CustomParametersModel() {
         customAbrRules;
 
     const context = this.context;
+    /**
+     * @type {import('../MediaPlayer.js').GetInstance<import('../../core/Settings.js')>}
+     */
     const settings = Settings(context).getInstance();
 
     function setup() {
