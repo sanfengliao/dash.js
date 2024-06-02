@@ -71,6 +71,9 @@ function BufferController(config) {
         mediaSource,
         maxAppendedIndex,
         maximumIndex,
+        /**
+         * @type {import('../MediaPlayer.js').Create<import('../SourceBufferSink.js')>}
+         */
         sourceBufferSink,
         dischargeBuffer,
         isPrebuffering,

@@ -36,6 +36,9 @@ import MediaPlayerEvents from '../MediaPlayerEvents.js';
 function MediaSourceController() {
 
     let instance,
+        /**
+         * @type {MediaSource}
+         */
         mediaSource,
         settings,
         mediaSourceType,

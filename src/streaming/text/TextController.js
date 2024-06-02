@@ -56,6 +56,9 @@ function TextController(config) {
 
     let instance,
         streamData,
+        /**
+         * @type {Record<string, import('../MediaPlayer.js').Create<import('./TextSourceBuffer.js')>>}
+         */
         textSourceBuffers,
         textTracks,
         vttParser,

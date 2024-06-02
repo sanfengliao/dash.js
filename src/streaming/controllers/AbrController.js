@@ -54,6 +54,9 @@ function AbrController() {
 
     let instance,
         logger,
+        /**
+         * @type {import('../MediaPlayer.js').Create<import('../rules/abr/ABRRulesCollection.js')>}
+         */
         abrRulesCollection,
         streamController,
         streamProcessorDict,
@@ -61,6 +64,9 @@ function AbrController() {
         abandonmentTimeout,
         windowResizeEventCalled,
         adapter,
+        /**
+         * @type {import('../MediaPlayer.js').GetInstance<import('../models/VideoModel.js')>}
+         */
         videoModel,
         mediaPlayerModel,
         customParametersModel,
@@ -608,6 +614,9 @@ function AbrController() {
                 return false;
             }
 
+            /**
+             * @type {import('../MediaPlayer.js').Create<import('../StreamProcessor.js')>}
+             */
             const streamProcessor = streamProcessorDict[streamId][type];
             const currentRepresentation = streamProcessor.getRepresentation();
             const rulesContext = RulesContext(context).create({

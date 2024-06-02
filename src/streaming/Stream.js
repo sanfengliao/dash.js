@@ -58,6 +58,9 @@ function Stream(config) {
     const mediaPlayerModel = config.mediaPlayerModel;
     const dashMetrics = config.dashMetrics;
     const manifestUpdater = config.manifestUpdater;
+    /**
+     * @type {import('./MediaPlayer.js').GetInstance<import('../dash/DashAdapter.js')>}
+     */
     const adapter = config.adapter;
     const timelineConverter = config.timelineConverter;
     const capabilities = config.capabilities;
@@ -66,8 +69,14 @@ function Stream(config) {
     const playbackController = config.playbackController;
     const throughputController = config.throughputController;
     const eventController = config.eventController;
+    /**
+     * @type {import('./MediaPlayer.js').GetInstance<import('./controllers/MediaController.js')>}
+     */
     const mediaController = config.mediaController;
     const protectionController = config.protectionController;
+    /**
+     * @type {import('./MediaPlayer.js').Create<import('./text/TextController.js')>}
+     */
     const textController = config.textController;
     const videoModel = config.videoModel;
     let streamInfo = config.streamInfo;
@@ -76,14 +85,23 @@ function Stream(config) {
 
     let instance,
         logger,
+        /**
+         * @type {Array<import('./MediaPlayer.js').Create<import('./StreamProcessor.js')>>}
+         */
         streamProcessors,
         isInitialized,
         isActive,
         hasFinishedBuffering,
         hasVideoTrack,
         hasAudioTrack,
+        /**
+         * @type {import('./MediaPlayer.js').Create<import('./controllers/FragmentController.js')>}
+         */
         fragmentController,
         thumbnailController,
+        /**
+         * @type {import('./MediaPlayer.js').Create<import('./controllers/BlacklistController.js')>}
+         */
         segmentBlacklistController,
         preloaded,
         boxParser,
@@ -874,6 +892,7 @@ function Stream(config) {
     function startScheduleControllers() {
         const ln = streamProcessors.length;
         for (let i = 0; i < ln && streamProcessors[i]; i++) {
+            // 视频和音频分开处理
             streamProcessors[i].getScheduleController().startScheduleTimer();
         }
     }

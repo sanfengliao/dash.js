@@ -48,6 +48,9 @@ function ServiceDescriptionController() {
         serviceDescriptionSettings,
         prftOffsets,
         logger,
+        /**
+         * @type {import('../../streaming/MediaPlayer.js').GetInstance<import('../DashAdapter.js')>}
+         */
         adapter;
 
     function setup() {

@@ -66,7 +66,13 @@ function StreamProcessor(config) {
     let adapter = config.adapter;
     let manifestModel = config.manifestModel;
     let mediaPlayerModel = config.mediaPlayerModel;
+    /**
+     * @type {import('./MediaPlayer.js').Create<import('./models/FragmentModel.js')>}
+     */
     let fragmentModel = config.fragmentModel;
+    /**
+     * @type {import('./MediaPlayer.js').GetInstance<import('./controllers/AbrController.js')>}
+     */
     let abrController = config.abrController;
     let playbackController = config.playbackController;
     let mediaController = config.mediaController;
@@ -81,13 +87,28 @@ function StreamProcessor(config) {
         isDynamic,
         currentMediaInfo,
         mediaInfoArr,
+        /**
+         * @type {import('./MediaPlayer.js').Create<import('./controllers/BufferController.js')>}
+         */
         bufferController,
+        /**
+         * @type {import('./MediaPlayer.js').Create<import('./controllers/ScheduleController.js')>}
+         */
         scheduleController,
+        /**
+         * @type {import('./MediaPlayer.js').Create<import('../dash/controllers/RepresentationController.js')>}
+         */
         representationController,
         shouldUseExplicitTimeForRequest,
         shouldRepeatRequest,
         qualityChangeInProgress,
+        /**
+         * @type {import('./MediaPlayer.js').Create<import('../dash/DashHandler.js')>}
+         */
         dashHandler,
+        /**
+         * @type {import('./MediaPlayer.js').Create<import('../dash/controllers/SegmentsController.js')>}
+         */
         segmentsController,
         bufferingTime,
         pendingSwitchToVoRepresentation;

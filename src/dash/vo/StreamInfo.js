@@ -29,8 +29,6 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * @class
- * @ignore
  */
 class StreamInfo {
     constructor() {

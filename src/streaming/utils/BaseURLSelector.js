@@ -48,9 +48,21 @@ function BaseURLSelector() {
     const settings = Settings(context).getInstance();
 
     let instance,
+        /**
+         * @type {import('../MediaPlayer.js').Create< import('../controllers/BlacklistController.js')>}
+         */
         serviceLocationBlacklistController,
+        /**
+         * @type {import('../MediaPlayer.js').Create< import('./baseUrlResolution/BasicSelector.js')>}
+         */
         basicSelector,
+        /**
+         * @type {import('../MediaPlayer.js').Create< import('./baseUrlResolution/DVBSelector.js')>}
+         */
         dvbSelector,
+        /**
+         * @type {import('../MediaPlayer.js').Create< import('./baseUrlResolution/ContentSteeringSelector.js')>}
+         */
         contentSteeringSelector,
         selector;
 

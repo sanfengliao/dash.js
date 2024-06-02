@@ -53,6 +53,9 @@ function FragmentController(config) {
 
     let instance,
         logger,
+        /**
+         * @type {Record<string, import('../MediaPlayer.js').Create<import('../models/FragmentModel.js')>>}
+         */
         fragmentModels;
 
     function setup() {

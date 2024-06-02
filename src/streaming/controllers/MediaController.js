@@ -37,6 +37,7 @@ import {bcp47Normalize} from 'bcp-47-normalize';
 import {extendedFilter} from 'bcp-47-match';
 import MediaPlayerEvents from '../MediaPlayerEvents.js';
 
+
 function MediaController() {
 
     const context = this.context;
@@ -166,7 +167,7 @@ function MediaController() {
     }
 
     /**
-     * @param {MediaInfo} track
+     * @param {import('../../dash/vo/MediaInfo.js').default} track
      * @memberof MediaController#
      */
     function addTrack(track) {
@@ -591,12 +592,14 @@ function MediaController() {
         }
 
         // If we know the current selected bitrate for the media type we select the AdaptationSet that comes closest to this. This should only be relevant for multiperiod when we transition to the next period.
+        // 如果我们知道媒体类型的当前选择的比特率，我们选择与之最接近的自适应集。这只在多周期转换到下一个周期时才相关。
         else if (lastSelectedRepresentations[type]) {
             tmpArr = _trackSelectionModeClosestBitrate(tmpArr, type)
         }
 
         // Use the track selection function that is defined in the settings
         else {
+            // 否则，根据设置中定义的轨道选择函数来处理 tmpArr。这里有多种模式，包括最高选择优先级、最高比特率、第一轨道、最高效率和最宽范围。如果模式不支持，将发出警告，并回退到第一轨道模式。
             let mode = settings.get().streaming.selectionModeForInitialTrack;
             switch (mode) {
                 case Constants.TRACK_SELECTION_MODE_HIGHEST_SELECTION_PRIORITY:

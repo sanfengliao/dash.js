@@ -283,6 +283,11 @@ function DashManifestModel() {
         return (a, b) => a.bandwidth - b.bandwidth;
     }
 
+    /**
+     * 将realAdaptation中的Representation按照bandwidth进行排序
+     * @param {*} realAdaptation 
+     * @returns 
+     */
     function processAdaptation(realAdaptation) {
         if (realAdaptation && realAdaptation.Representation) {
             realAdaptation.Representation.sort(getRepresentationSortFunction());
@@ -331,6 +336,13 @@ function DashManifestModel() {
         }
     }
 
+    /**
+     * 获取realAdaptation所在的标
+     * @param {*} realAdaptation 
+     * @param {*} manifest 
+     * @param {*} periodIndex 
+     * @returns 
+     */
     function getIndexForAdaptation(realAdaptation, manifest, periodIndex) {
         if (!realAdaptation) {
             return -1;
@@ -774,6 +786,11 @@ function DashManifestModel() {
         return (periodStart - presentationOffset);
     }
 
+    /**
+     * 将mpd的AdaptationSet转成AdaptationSet vo 对象
+     * @param {*} voPeriod 
+     * @returns 
+     */
     function getAdaptationsForPeriod(voPeriod) {
         const realPeriod = voPeriod && isInteger(voPeriod.index) ? voPeriod.mpd.manifest.Period[voPeriod.index] : null;
         const voAdaptations = [];
@@ -827,16 +844,22 @@ function DashManifestModel() {
             // If the attribute @start is present in the Period, then the
             // Period is a regular Period and the PeriodStart is equal
             // to the value of this attribute.
+            //  如果@start 存在于 Period 中，那么 
+            // 这个 Period 就是一个regular Period，且 PeriodStart 等于 
+            // 这个属性的值
             if (realPeriod.hasOwnProperty(DashConstants.START)) {
                 voPeriod = new Period();
                 voPeriod.start = realPeriod.start;
             }
+
             // If the @start attribute is absent, but the previous Period element contains a @duration attribute then this new Period is also a regular Period. The start time of the new Period PeriodStart is the sum of the start time of the previous Period PeriodStart and the value of the attribute @duration of the previous Period.
+            // 如果 @start 属性不存在，但是前一个 Period 元素包含一个 @duration 属性，那么这个新的 Period 也是一个常规的 Period。新 Period 的开始时间 PeriodStart 是前一个 Period 的开始时间 PeriodStart 加上 Period 的 @duration。
             else if (realPreviousPeriod !== null && realPreviousPeriod.hasOwnProperty(DashConstants.DURATION) && voPreviousPeriod !== null) {
                 voPeriod = new Period();
                 voPeriod.start = parseFloat((voPreviousPeriod.start + voPreviousPeriod.duration).toFixed(5));
             }
             // If (i) @start attribute is absent, and (ii) the Period element is the first in the MPD, and (iii) the MPD@type is 'static', then the PeriodStart time shall be set to zero.
+            // 如果 (i) @start 属性不存在，且 ( Period 元素是 MPD 中的第一个，且  MPD 是 'static'，那么 PeriodStart 则是0。
             else if (i === 0 && !isDynamic) {
                 voPeriod = new Period();
                 voPeriod.start = 0;
@@ -845,6 +868,7 @@ function DashManifestModel() {
             // The Period extends until the PeriodStart of the next Period.
             // The difference between the PeriodStart time of a Period and
             // the PeriodStart time of the following Period.
+            // 如果前一个 Period 的 duration 不存在，则前一个 Period 的 duration为当前 Period 的 start 减去前一个 Period 的 start
             if (voPreviousPeriod !== null && isNaN(voPreviousPeriod.duration)) {
                 if (voPeriod !== null) {
                     voPreviousPeriod.duration = parseFloat((voPeriod.start - voPreviousPeriod.start).toFixed(5));
@@ -883,6 +907,7 @@ function DashManifestModel() {
         // The last Period extends until the end of the Media Presentation.
         // The difference between the PeriodStart time of the last Period
         // and the mpd duration
+        // 最后一个Period的持续时间为 mpd 的 duration 减去最后一个 Period 的 start
         if (voPreviousPeriod !== null && isNaN(voPreviousPeriod.duration)) {
             voPreviousPeriod.duration = parseFloat((getEndTimeForLastPeriod(voPreviousPeriod) - voPreviousPeriod.start).toFixed(5));
         }

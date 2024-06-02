@@ -43,6 +43,9 @@ function FragmentModel(config) {
     const eventBus = config.eventBus;
     const events = config.events;
     const dashMetrics = config.dashMetrics;
+    /**
+     * @type {import('../MediaPlayer.js').Create<import('../FragmentLoader.js')>}
+     */
     const fragmentLoader = config.fragmentLoader;
     const debug = config.debug;
     const streamInfo = config.streamInfo;

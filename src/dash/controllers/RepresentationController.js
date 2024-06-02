@@ -71,6 +71,10 @@ function RepresentationController(config) {
         }
     }
 
+    /**
+     * 
+     * @returns {import('../vo/Representation.js').default} currentVoRepresentation
+     */
     function getCurrentRepresentation() {
         return currentVoRepresentation;
     }

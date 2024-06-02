@@ -10,6 +10,9 @@ function CapabilitiesFilter() {
     const eventBus = EventBus(context).getInstance();
 
     let instance,
+        /**
+         * @type { import('../MediaPlayer.js').GetInstance<import('../../dash/DashAdapter.js')> }
+         */
         adapter,
         capabilities,
         settings,
@@ -72,6 +75,7 @@ function CapabilitiesFilter() {
 
         const promises = [];
         manifest.Period.forEach((period) => {
+            // filter unsupported AdaptationSets
             promises.push(_filterUnsupportedAdaptationSetsOfPeriod(period, type));
         });
 
@@ -89,6 +93,7 @@ function CapabilitiesFilter() {
             const promises = [];
             period.AdaptationSet.forEach((as) => {
                 if (adapter.getIsTypeOf(as, type)) {
+                    // filter unsupported Representations
                     promises.push(_filterUnsupportedRepresentationsOfAdaptation(as, type));
                 }
             });
@@ -96,6 +101,7 @@ function CapabilitiesFilter() {
             Promise.all(promises)
                 .then(() => {
                     period.AdaptationSet = period.AdaptationSet.filter((as) => {
+                        // 如果没有支持的Representation，则删除AdaptationSet
                         const supported = as.Representation && as.Representation.length > 0;
                         if (!supported) {
                             eventBus.trigger(Events.ADAPTATION_SET_REMOVED_NO_CAPABILITIES, {

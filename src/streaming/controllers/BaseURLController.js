@@ -47,7 +47,13 @@ function BaseURLController() {
     const eventBus = EventBus(context).getInstance();
     const urlUtils = URLUtils(context).getInstance();
 
+    /**
+     * @type {import('../MediaPlayer.js').Create<import('../models/BaseURLTreeModel.js')>}
+     */
     let baseURLTreeModel,
+    /**
+     * @type {import('../MediaPlayer.js').Create<import('../utils/BaseURLSelector.js')>}
+     */
         baseURLSelector,
         contentSteeringController;
 

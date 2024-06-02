@@ -70,18 +70,48 @@ function StreamController() {
      */
     let adapter;
     let dashMetrics;
-    let mediaSourceController, timeSyncController, contentSteeringController;
+    /**
+     * @type {import('../MediaPlayer.js').GetInstance<import('./MediaSourceController.js')>}
+     */
+    let mediaSourceController, 
+        /**
+         * @type {import ('../MediaPlayer.js').GetInstance<import('./TimeSyncController.js')>}
+         */
+        timeSyncController, contentSteeringController;
     /**
      * @type {import('../MediaPlayer.js').Create<import('../controllers/BaseURLController.js')>}
      */
     let baseURLController;
     let segmentBaseController, uriFragmentModel, abrController, throughputController, mediaController, eventController,
         initCache,
-        errHandler, timelineConverter, streams, activeStream, protectionController, textController, protectionData,
-        autoPlay, isStreamSwitchingInProgress, hasMediaError, hasInitialisationError, mediaSource, videoModel,
-        playbackController, serviceDescriptionController, mediaPlayerModel, customParametersModel, isPaused,
+        errHandler, timelineConverter, 
+        /**
+         * @type {Array<import('../MediaPlayer.js').Create<import('../Stream.js')>>}
+         */
+        streams, 
+        /**
+         * @type {import('../MediaPlayer.js').Create<import('../Stream.js')}
+         */
+        activeStream, protectionController, textController, protectionData,
+        autoPlay, isStreamSwitchingInProgress, hasMediaError, hasInitialisationError, 
+        /**
+         * @type {Mediasou}
+         */
+        mediaSource, videoModel,
+        /**
+         * @type { import('../MediaPlayer.js').GetInstance<import('./PlaybackController.js')>}
+         */
+        playbackController, 
+        /**
+         * @type {import('../MediaPlayer.js').GetInstance<import('../../dash/controllers/ServiceDescriptionController.js')>}
+         */
+        serviceDescriptionController, mediaPlayerModel, customParametersModel, isPaused,
         initialPlayback, initialSteeringRequest, playbackEndedTimerInterval, bufferSinks, preloadingStreams,
-        supportsChangeType, settings,
+        supportsChangeType, 
+        /**
+         * @type {import('../MediaPlayer.js').GetInstance<import('../../core/Settings.js')>}
+         */
+        settings,
         firstLicenseIsFetched, waitForPlaybackStartTimeout, providedStartTime, errorInformation;
 
     function setup() {
@@ -297,7 +327,7 @@ function StreamController() {
 
     /**
      * Called for each stream when composition is performed. Either a new instance of Stream is created or the existing one is updated.
-     * @param {object} streamInfo
+     * @param {import('../../dash/vo/StreamInfo.js')} streamInfo
      * @private
      */
     function _initializeOrUpdateStream(streamInfo) {
@@ -1282,6 +1312,7 @@ function StreamController() {
                 .then(() => {
                     baseURLController.initialize(manifest);
 
+                    // TODO: dynamic streams has manifestUTCTimingSources
                     let manifestUTCTimingSources = adapter.getUTCTimingSources();
                     if (adapter.getIsDynamic() && (!manifestUTCTimingSources || manifestUTCTimingSources.length === 0)) {
                         eventBus.trigger(MediaPlayerEvents.CONFORMANCE_VIOLATION, {

@@ -177,6 +177,16 @@ function DashAdapter() {
         return (sameId && sameCodec && sameViewpoint && sameLang && sameRoles && sameAccessibility && sameAudioChannelConfiguration);
     }
 
+    /**
+     * 
+     * @param {*} manifest 
+     * @param {*} period 
+     * @param {*} streamInfo 
+     * @param {*} adaptations 
+     * @param {*} type 
+     * @param {*} embeddedText 
+     * @returns {import('./vo/MediaInfo.js').default[]}
+     */
     function _getAllMediaInfo(manifest, period, streamInfo, adaptations, type, embeddedText) {
         let mediaArr = [];
         let data,
@@ -190,6 +200,9 @@ function DashAdapter() {
             return [];
         }
 
+        /**
+         * 将Adaptation转换为Adaptation vo
+         */
         const voAdaptations = dashManifestModel.getAdaptationsForPeriod(period);
 
         for (i = 0, ln = adaptations.length; i < ln; i++) {
@@ -251,7 +264,7 @@ function DashAdapter() {
      * @param {object} streamInfo
      * @param {MediaType} type
      * @param {object} externalManifest Set to null or undefined if no external manifest is to be used
-     * @returns {Array} mediaArr
+     * @returns {Array<import('./vo/MediaInfo.js').default>} mediaArr
      * @memberOf module:DashAdapter
      * @instance
      */
@@ -944,6 +957,12 @@ function DashAdapter() {
         }
     }
 
+    /**
+     * 获取streamInfo对应的Period
+     * @param {*} streamInfo 
+     * @param {*} voPeriodsArray 
+     * @returns 
+     */
     function getPeriodForStreamInfo(streamInfo, voPeriodsArray) {
         const ln = voPeriodsArray.length;
 

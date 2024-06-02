@@ -45,11 +45,17 @@ function ScheduleController(config) {
     const dashMetrics = config.dashMetrics;
     const mediaPlayerModel = config.mediaPlayerModel;
     const fragmentModel = config.fragmentModel;
+    /**
+     * @type {import('../MediaPlayer.js').GetInstance<import('../controllers/ABRController.js')>}
+     */
     const abrController = config.abrController;
     const playbackController = config.playbackController;
     const textController = config.textController;
     const type = config.type;
     const bufferController = config.bufferController;
+    /**
+     * @type {import('../MediaPlayer.js').GetInstance<import('../../dash/controllers/RepresentationController.js')>}
+     */
     const representationController = config.representationController
     const settings = config.settings;
 
